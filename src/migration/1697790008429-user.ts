@@ -5,7 +5,7 @@ export class Film1697790008429 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "films",
+                name: "users",
                 columns: [
                     {
                         name: "id",
@@ -32,7 +32,7 @@ export class Film1697790008429 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
        
-        await queryRunner.dropTable("films");
+        await queryRunner.dropTable("users");
     }
 
 }

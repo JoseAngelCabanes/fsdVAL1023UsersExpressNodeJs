@@ -1,6 +1,8 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { Film1697790008429 } from "./migration/1697790008429-film"
+import { Film1697790008429 } from "./migration/1697790008429-user"
+import { User } from "./models/User"
+
 
 export const AppDataSource = new DataSource({
  type: "mysql",
@@ -9,7 +11,7 @@ export const AppDataSource = new DataSource({
  username: "root",
  password: "1324",
  database: "fsd-typeorm",
- entities: [],
+ entities: [User],
  migrations: [Film1697790008429],
  synchronize: false,
  logging: false,

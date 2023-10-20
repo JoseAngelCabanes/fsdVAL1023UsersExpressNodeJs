@@ -1,11 +1,14 @@
 import { Request, Response } from "express"
+import { User } from "../models/User"
 
 
 
 
-const getUsers = (req: Request, res: Response) =>{ 
+const getUsers = async(req: Request, res: Response) =>{ 
     //logica del o que yo quiero hacer/devolver
     
+    const users = await User.find()
+
     return res.send('GET USERS')
 }
 
@@ -31,6 +34,8 @@ const updateUserById = (req: Request, res: Response) => {
 
 const deleteUserById = (req: Request, res: Response) => {
     //logica para borrar películas
+    
+    const userId = req.params.id
     
     return res.send('USER DELETED SUCCESFULLY')
 }
