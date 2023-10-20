@@ -12,36 +12,60 @@ const getUsers = async(req: Request, res: Response) =>{
     return res.send('GET USERS')
 }
 
-const createUsers = (req: Request, res: Response) => {
-    //logica para crear películas
+const createUsers = async (req: Request, res: Response) => {
+    //logica para crear usuarios
     console.log('create');
+    try{
     
+    const newUser = await User.create(
+        {
+            userName: req.body.userName,
+            gametag: req.body.gametag
+        }
+    ).save()
 
+        return res.send(newUser)
+    } catch(error) {
+        return res.send(error)
+    }
     console.log(req.body);
 
-    return res.send('USER CREATED SUCCESFULLY')
 }
 
 
 
 const updateUserById = (req: Request, res: Response) => {
-    //logica para actualizar películas
+    //logica para actualizar usuarios
 
     const usersId = req.params.id
     
     return res.send('USER ' + usersId + ' UPDATED SUCCESFULLY')
 }
 
-const deleteUserById = (req: Request, res: Response) => {
-    //logica para borrar películas
-    
-    const userId = req.params.id
-    
-    return res.send('USER DELETED SUCCESFULLY')
+const deleteUserById = async(req: Request, res: Response) => {
+    //logica para borrar usuarios
+    try {
+
+        const userIdToDelete = req.params.id
+
+        const userDeleted =  await User.delete(
+            {
+                id: parseInt(userIdToDelete)
+            }
+        )
+
+       
+        if (userDeleted.affected){
+            return res.send(`The id has been deleted correctly ` + userIdToDelete)
+        }
+    } catch (error) {
+        return res.send(error)
+    }
+
 }
 
 const getUserById = (req: Request, res: Response) => {
-    //logica para borrar películas
+    //logica para borrar usuarios
     const usersId = req.params.id
     return res.send('USER ' + usersId)
 }

@@ -7,9 +7,9 @@ export class User extends BaseEntity{
     id!: number
 
     @Column()
-    title!: string
+    userName!: string
 
     @Column()
-    director!: string
+    gametag!: string
    
 }
