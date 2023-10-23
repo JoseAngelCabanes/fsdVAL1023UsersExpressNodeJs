@@ -32,6 +32,8 @@ export class CreateOccupationTable1698047217959 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+
+        await queryRunner.dropTable("occupation");
     }
 
 }
