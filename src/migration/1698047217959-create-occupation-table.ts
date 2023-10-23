@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm"
 
-export class Film1697790008429 implements MigrationInterface {
+export class CreateOccupationTable1698047217959 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "users",
+                name: "occupation",
                 columns: [
                     {
                         name: "id",
@@ -15,16 +15,16 @@ export class Film1697790008429 implements MigrationInterface {
                         generationStrategy: "increment",
                     },
                     {
-                        name: "userName",
+                        name: "name",
                         type: "varchar",
-                        length: "255",
+                        length: "50"
                     },
                     {
-                        name: "gametag",
-                        type: "varchar",
-                        length: "255",
+                        name: "is_active",
+                        type: "boolean",
+                        default: true
                     }
-                    
+
                 ],
             }),
             true
@@ -32,8 +32,6 @@ export class Film1697790008429 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-       
-        await queryRunner.dropTable("users");
     }
 
 }

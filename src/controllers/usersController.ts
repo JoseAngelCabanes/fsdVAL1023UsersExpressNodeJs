@@ -9,7 +9,7 @@ const getUsers = async(req: Request, res: Response) =>{
     
     const users = await User.find()
 
-    return res.send('GET USERS')
+    return res.send(users)
 }
 
 const createUsers = async (req: Request, res: Response) => {
@@ -43,26 +43,24 @@ const updateUserById = (req: Request, res: Response) => {
 }
 
 const deleteUserById = async(req: Request, res: Response) => {
-    //logica para borrar usuarios
+    // Lógica para borrar usuarios
     try {
+        const userIdToDelete = req.params.id;
 
-        const userIdToDelete = req.params.id
+        const userDeleted =  await User.delete({
+            id: parseInt(userIdToDelete)
+        });
 
-        const userDeleted =  await User.delete(
-            {
-                id: parseInt(userIdToDelete)
-            }
-        )
-
-       
-        if (userDeleted.affected){
-            return res.send(`The id has been deleted correctly ` + userIdToDelete)
+        if (userDeleted.affected) {
+            return res.send('The id ' + userIdToDelete +  ' has been deleted correctly');
+        } else {
+            return res.send('No user was found with the provided ID for deletion.');
         }
     } catch (error) {
-        return res.send(error)
+        return res.send(error);
     }
+};
 
-}
 
 const getUserById = (req: Request, res: Response) => {
     //logica para borrar usuarios
